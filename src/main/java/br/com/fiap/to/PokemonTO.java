@@ -3,7 +3,7 @@ package br.com.fiap.to;
 import java.time.LocalDate;
 
 // TO: Transfer Object.
-// Classe que representa o Banco de Dados
+// Classe que representa o Banco de Dados.
 public class PokemonTO {
     private Long codigo;
     private String nome;
@@ -70,5 +70,17 @@ public class PokemonTO {
 
     public void setDataDaCaptura(LocalDate dataDaCaptura) {
         this.dataDaCaptura = dataDaCaptura;
+    }
+
+    @Override
+    public String toString() {
+        return "PokemonTO{" +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", altura=" + altura +
+                ", peso=" + peso +
+                ", categoria='" + categoria + '\'' +
+                ", dataDaCaptura=" + dataDaCaptura +
+                '}';
     }
 }

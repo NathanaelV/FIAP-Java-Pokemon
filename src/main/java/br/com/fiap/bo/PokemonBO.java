@@ -1,0 +1,18 @@
+package br.com.fiap.bo;
+
+import br.com.fiap.dao.PokemonDAO;
+import br.com.fiap.to.PokemonTO;
+
+import java.util.ArrayList;
+
+// BO: Business Object
+// Essa classe implementa a regra de negócio da aplicação.
+public class PokemonBO {
+    private PokemonDAO pokemonDAO;
+
+    public ArrayList<PokemonTO> findAll() {
+        pokemonDAO = new PokemonDAO();
+        // Implementação da regra de negócio.
+        return pokemonDAO.findAll();
+    }
+}

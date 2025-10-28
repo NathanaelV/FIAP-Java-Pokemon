@@ -1,0 +1,8 @@
+{
+    "codigo": 6,
+    "nome": "Charizard",
+    "altura": 1.7,
+    "peso": 90.5,
+    "categoria": "Chama",
+    "dataDaCaptura": "2023-10-15"
+}

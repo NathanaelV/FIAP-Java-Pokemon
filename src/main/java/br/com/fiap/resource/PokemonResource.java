@@ -2,13 +2,13 @@ package br.com.fiap.resource;
 
 import br.com.fiap.bo.PokemonBO;
 import br.com.fiap.to.PokemonTO;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.validation.ReportAsSingleViolation;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.awt.*;
+import java.lang.annotation.Repeatable;
 import java.util.ArrayList;
 
 // Path: define o caminho base para todos os métodos de da classe PokemonResource.
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class PokemonResource {
     private PokemonBO pokemonBO = new PokemonBO();
 
-    // GET: é o verbo HTTP que mapeia o method findAll.
+    // GET: responde por requisições GET, que é o verbo HTTP que mapeia o method findAll. Verbo de solicitação.
     @GET
     // Produces: define o tipo de informação que o method irá produzir.
     // MediaType.APPLICATION_JSON: constante que representa o formato JSON.
@@ -33,9 +33,44 @@ public class PokemonResource {
             response = Response.status(404);    // 404 (NOT FOUND)
         }
 
-        // Forma o Body/entity da resposta HTTP
+        // entity: forma o Body/entity da resposta HTTP
+        response.entity(resultado);
+        // build: forma o response, unindo o status, o body e o header
+        return response.build();
+    }
+
+    // POST: responde por requisições POST. Verbo HTTP usado para enviar dados
+    @POST
+    // Consumes: Define o tipo de informação que o recurso recebe
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response save(PokemonTO pokemon) {
+        PokemonTO resultado = pokemonBO.save(pokemon);
+        Response.ResponseBuilder response = null;
+
+        if (resultado != null) {
+            response = Response.created(null);  // 201 - CREATED
+        } else {
+            response = Response.status(400);            // 401 - BAD REQUEST
+        }
+
         response.entity(resultado);
         return response.build();
     }
 
+    @GET
+    @Path("/{codigo}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findByCodigo(@PathParam("codigo") Long codigo) {
+        PokemonTO resulado = pokemonBO.findByCodigo(codigo);
+        Response.ResponseBuilder response = null;
+
+        if (resulado != null) {
+            response = Response.ok();           // 200 (OK)
+        } else {
+            response = Response.status(404);    // 404 (NOT FOUND)
+        }
+
+        response.entity(resulado);
+        return response.build();
+    }
 }

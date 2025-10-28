@@ -15,4 +15,16 @@ public class PokemonBO {
         // Implementação da regra de negócio.
         return pokemonDAO.findAll();
     }
+
+    public PokemonTO save(PokemonTO pokemon) {
+        pokemonDAO = new PokemonDAO();
+
+        return pokemonDAO.save(pokemon);
+    }
+
+    public PokemonTO findByCodigo(Long codigo) {
+        pokemonDAO = new PokemonDAO();
+
+        return pokemonDAO.findByCodigo(codigo);
+    }
 }

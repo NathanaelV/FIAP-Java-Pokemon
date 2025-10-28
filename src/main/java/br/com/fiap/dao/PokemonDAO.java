@@ -98,4 +98,19 @@ public class PokemonDAO {
 
         return pokemon;
     }
+
+    public boolean delete(Long codigo) {
+        String sql = "delete from ddd_pokemons where codigo = ?";
+
+        try (PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(sql)) {
+            ps.setLong(1, codigo);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao excluir: " + e.getMessage());
+        } finally {
+            ConnectionFactory.closeConnection();
+        }
+
+        return false;
+    }
 }

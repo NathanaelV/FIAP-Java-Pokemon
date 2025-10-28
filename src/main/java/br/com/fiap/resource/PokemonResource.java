@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.apache.camel.component.properties.RefPropertiesSource;
 
 import java.awt.*;
 import java.lang.annotation.Repeatable;
@@ -77,6 +78,21 @@ public class PokemonResource {
         }
 
         response.entity(resulado);
+        return response.build();
+    }
+
+    // DELETE: responde por requisições DELETE.
+    @DELETE
+    @Path("/{codigo}")
+    public Response delete(@PathParam("codigo") Long codigo) {
+        Response.ResponseBuilder response = null;
+
+        if (pokemonBO.delete(codigo)) {
+            response = Response.status(204); // 204 - NO CONTENT
+        } else {
+            response = Response.status(404); // 404 - NOT FOUND
+        }
+
         return response.build();
     }
 }

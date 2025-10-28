@@ -27,4 +27,10 @@ public class PokemonBO {
 
         return pokemonDAO.findByCodigo(codigo);
     }
+
+    public boolean delete(Long codigo) {
+        pokemonDAO = new PokemonDAO();
+
+        return pokemonDAO.delete(codigo);
+    }
 }

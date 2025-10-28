@@ -3,6 +3,7 @@ package br.com.fiap.resource;
 import br.com.fiap.bo.PokemonBO;
 import br.com.fiap.to.PokemonTO;
 import jakarta.validation.ReportAsSingleViolation;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -43,7 +44,8 @@ public class PokemonResource {
     @POST
     // Consumes: Define o tipo de informação que o recurso recebe
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response save(PokemonTO pokemon) {
+    // @Valid Ativa as validações feitas no PokemonTO
+    public Response save(@Valid PokemonTO pokemon) {
         PokemonTO resultado = pokemonBO.save(pokemon);
         Response.ResponseBuilder response = null;
 
@@ -58,10 +60,14 @@ public class PokemonResource {
     }
 
     @GET
-    @Path("/{codigo}")
+    // Path: acrescenta um novo path ao "/pokemon", as chaves {} indicam que codigo é uma variável.
+    // Ex.: /pokemon/6, o valor de codigo1 será 6
+    @Path("/{codigo1}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByCodigo(@PathParam("codigo") Long codigo) {
-        PokemonTO resulado = pokemonBO.findByCodigo(codigo);
+    // PathParam: extrai o valor da variável codigo1 que foi passado no Path, e passa para codigo2, já convertendo para
+    // o tipo especificado, nesse caso Long
+    public Response findByCodigo(@PathParam("codigo1") Long codigo2) {
+        PokemonTO resulado = pokemonBO.findByCodigo(codigo2);
         Response.ResponseBuilder response = null;
 
         if (resulado != null) {

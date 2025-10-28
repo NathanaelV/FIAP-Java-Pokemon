@@ -1,15 +1,27 @@
 package br.com.fiap.to;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 // TO: Transfer Object.
 // Classe que representa o Banco de Dados.
 public class PokemonTO {
     private Long codigo;
+    @NotBlank
     private String nome;
+    @NotNull
+    @Positive
     private Double altura;
+    @NotNull
+    @Positive
     private Double peso;
+    @NotBlank
     private String categoria;
+    @PastOrPresent
     private LocalDate dataDaCaptura;
 
     public PokemonTO() {

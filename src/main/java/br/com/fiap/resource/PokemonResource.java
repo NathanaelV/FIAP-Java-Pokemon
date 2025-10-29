@@ -95,4 +95,22 @@ public class PokemonResource {
 
         return response.build();
     }
+
+    @PUT
+    @Path("/{codigo}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@Valid PokemonTO pokemon, @PathParam("codigo") Long codigo) {
+        pokemon.setCodigo(codigo);
+        PokemonTO resultado = pokemonBO.update(pokemon);
+        Response.ResponseBuilder response = null;
+
+        if (resultado != null) {
+            response = Response.created(null);  // 201 - CREATED
+        } else {
+            response = Response.status(400);            // 400 - BAD REQUEST
+        }
+
+        response.entity(resultado);
+        return response.build();
+    }
 }

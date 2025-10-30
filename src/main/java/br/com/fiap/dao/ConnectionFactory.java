@@ -31,12 +31,9 @@ public class ConnectionFactory {
             // - @oracle.fiap.com.br: endereço IP onde o banco de dados Oracle está instalado
             // - 1521: Porta
             // - ORCL: é o SID (System ID) Service Name, nome da instância dentro do servidor
-            String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
-//            String url = System.getenv("DB_URL"); // "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
-            final String USER = "RM564990";
-//            final String USER = System.getenv("DB_USER");
-            final String PASSWORD = "060196";
-//            final String PASSWORD = System.getenv("DB_PASSWORD");
+            String url = System.getenv("DB_URL"); // "jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL";
+            final String USER = System.getenv("DB_USER");
+            final String PASSWORD = System.getenv("DB_PASSWORD");
 
             // Valida se as informações foram preenchidas antes de tentar uma conexão com o Banco de Dados.
             if (url == null || USER == null || PASSWORD == null) {

@@ -1,4 +1,4 @@
-# S02Projeto18-Pokemon
+# S02Projeto-Pokemon
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
